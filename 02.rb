@@ -4,8 +4,8 @@
 # sequence whose values do not exceed four million,
 # find the sum of the even-valued terms.
 
-# We start by noting thateven valued terms can be 
-# indexed by the 3n + 2, where n is a non-negative integer
+# We start by noting that even valued terms can be indexed
+# by the formula 3n + 2, where n is a non-negative integer
 def get_fib(n)
 	return 1 if n == 1
 	return 2 if n == 2	
