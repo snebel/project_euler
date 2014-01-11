@@ -1,13 +1,8 @@
 # How many such routes are there through a 20×20 grid?
 # My note: length of paths in n*n grid are 2*n
 
-
-def factorial_helper(n, product)
-	n == 1 ? product : factorial_helper(n-1, n*product)
-end
-
-def factorial(n)
-	factorial_helper(n, 1)
+def factorial(n, product = 1)
+	n == 1 ? product : factorial(n - 1, n * product)
 end
 
 def binom_coefficient(n, k)
@@ -20,4 +15,3 @@ def calc_grid_paths(n)
 end
 
 puts calc_grid_paths(20)
-#
