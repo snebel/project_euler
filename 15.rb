@@ -1,5 +1,5 @@
 # How many such routes are there through a 20×20 grid?
-# My note: length of paths in n*n grid are 2*n
+# My note: Number of paths thru n * n grid = 2n Choose n.
 
 def factorial(n, product = 1)
 	n == 1 ? product : factorial(n - 1, n * product)
