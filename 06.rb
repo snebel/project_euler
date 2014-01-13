@@ -2,6 +2,7 @@
 # first one hundred natural numbers and the square of the sum.
 
 def find_difference(n)
+	n = n.to_f
 	sqs_sum = (n * (2 * n + 1) * (n + 1)) / 6
 	(n * (n + 1) / 2)**2 - sqs_sum
 end
