@@ -10,4 +10,4 @@ def sum_digits(num_str)
 	sum
 end
 
-print sum_digits(factorial(100).to_s)
+puts sum_digits(factorial(100).to_s)
