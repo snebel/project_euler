@@ -34,12 +34,12 @@
 
 def split_tree(tree)
 	top = tree.shift.first
-  sub1 = o1.map { |row| row.pop; row }
-  print sub1
-  print o1
-  print tree
-  sub2 = o2.map { |row| row.shift; row }
-  #print sub2
+  tree_copy = tree.dup
+  sub1 = tree.map { |row| row.pop; row }
+  #print sub1
+  print tree_copy
+  sub2 = tree_copy.map { |row| row.shift; row }
+  print sub2
   return sub1, sub2
 end
 
@@ -49,7 +49,7 @@ def max_path(tree, sum = 0)
 	[max_path(sub1, sum + sub1.top), max_path(sub2, sum + sub2.top)].max
 end
 
-# split_tree([ [3], [7,4], [2,4,6], [8,5,9,3] ])
+split_tree([ [3], [7,4], [2,4,6], [8,5,9,3] ])
 
 
 

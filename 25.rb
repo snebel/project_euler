@@ -6,7 +6,8 @@ def fib(n, prev = 1, sum = 1)
 end
 
 def first_n_digit_fib(n)
-  1.upto(Float::INFINITY) { |i| return i if fib(i) >= 10**n }
+  limit = 10**(n-1)
+  1.upto(Float::INFINITY) { |i| return i if fib(i) >= limit }
 end
 
 puts first_n_digit_fib(1000)
