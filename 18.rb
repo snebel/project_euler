@@ -31,12 +31,11 @@ def right_subtree(tree)
 end
 
 def max_path(tree, sum = 0)
-  STEPS << sum
-	return sum if tree.size == 0
+  return sum if tree.size == 0
   top = tree.shift.first
   tree_copy = tree.map {|row| row.dup} # need deep copy
   sub1, sub2 = left_subtree(tree), right_subtree(tree_copy)
-	[max_path(sub1, sum + top), max_path(sub2, sum + top)].max
+  [max_path(sub1, sum + top), max_path(sub2, sum + top)].max
 end
 
 puts max_path(tree)
