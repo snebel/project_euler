@@ -1,8 +1,9 @@
 # What is the sum of the digits of the number 2^1000?
 
-def sum_array(ints)
-  nums = ints.map {|n| n.to_i }
-  nums.reduce(:+)
+class Bignum
+  def sum_digits
+    self.to_s.chars.map(&:to_i).reduce(:+)
+  end
 end
 
-puts sum_array((2**1000).to_s.split(//))
+puts (2**1000).sum_digits
