@@ -8,8 +8,7 @@
 
 def is_prime?(n)
   return false if n < 2
-  2.upto(Math.sqrt(n).to_i) { |num| return false if n % num == 0 }
-  true
+  2.upto(Math.sqrt(n).to_i) { |i| return false if n % i == 0 }
 end
 
 def consec_primes(a, b, n = 0, count = 0)
