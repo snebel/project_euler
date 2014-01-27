@@ -11,29 +11,22 @@
 
 require 'prime' 
 
-def rotation(n)
+def rotate(n)
   digits = n.to_s.chars
   last = digits.shift
   digits << last
   digits.join.to_i
 end
 
-def get_rotations(n, origin, ros = [])
-  next_ro = rotation(n)
-  if next_ro == origin || origin % 10 == 0 || next_ro.to_s.size < origin.to_s.size
-    [origin] + ros 
-  else
-    get_rotations(next_ro, origin, ros << next_ro)
-  end
+def get_rotations(n, orig, ros = [])
+  next_ro = rotate(n)
+  next_ro == orig ? [orig] + ros : get_rotations(next_ro, orig, ros << next_ro)
 end
 
 def is_circle?(n)
   return false if n.to_s.chars.include?('0') 
-  ros = get_rotations(n, n)
-  ros.each {|r| return false if !Prime.prime?(r)}
-  return true
+  get_rotations(n, n).each {|r| return false if !Prime.prime?(r)}
 end
 
 limit = 999_999
-
-puts Prime.each(limit).select {|p| is_circle?(p)}.size
+puts Prime.each(limit).select {|p| is_circle?(p)}.count
