@@ -4,12 +4,17 @@
 # base, may not include leading zeros.)
 #
 # My Note:
-# - This problem is easy (and a little cheap) using rubys to_s(base=n) method
-# - My own binary conversion method to follow...
+# - This problem is easy (and a little cheap) using rubys to_s(base=n) method,
+#   so I've written my own tail-recursive binary method.
+# - A palindrome number in binary must be odd, so only need to check odds
 
 def palin?(n)
   str = n.to_s
   str == str.reverse
 end
 
-puts (1..999_999).select {|n| palin?(n) && palin?(n.to_s(2))}.reduce(:+)
+def binary(x, n = Math.log(x, 2).to_i, bi = [])
+  n == -1 ? bi.join : binary(x % (2**n), n-1, bi << (x / 2**n))
+end
+
+p (1..999_999).step(2).select {|n| palin?(n) && palin?(binary(n))}.reduce(:+)
