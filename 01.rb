@@ -10,4 +10,4 @@ def find_sum_of_mults(x, y, limit)
   set1.union(set2).reduce(:+)
 end  
 
-puts find_sum_of_mults(3, 5, 1000)
+puts find_sum_of_mults(3, 5, 999)
