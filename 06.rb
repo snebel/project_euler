@@ -3,7 +3,7 @@
 #
 # My Notes:
 # - Use standard formulas to find sum of first n squares and
-#   sum of the first n natural numersg
+#   sum of the first n natural numbers
 
 def find_difference(n)
   sq_sum = (n.to_f * (n + 1) / 2)**2
