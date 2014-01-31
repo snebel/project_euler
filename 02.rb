@@ -5,16 +5,17 @@
 # sequence whose values do not exceed four million,
 # find the sum of the even-valued terms.
 #
-# My note: even-valued terms can be indexed
-# by 3n + 2, n a non-negative integer
+# My Notes: 
+# - Even-valued terms can be indexed by 3n+2 for n >= 0
+# - Use tail-recursive fibonacci method
 
 def fib(n, prev = 1, sum = 1)
 	n == 1 ? sum : fib(n - 1, sum, sum + prev)
 end
 
-def sum_even_fibs_upto(limit, sum, n)
-	return sum if fib(3*n + 2) > limit
-	sum_even_fibs_upto(limit, sum + fib(3*n + 2), n+1)
+def sum_even_fibs(limit, sum = 0, n = 0)
+  next_fib = fib(3*n + 2)
+	next_fib > limit ? sum : sum_even_fibs(limit, sum+next_fib, n+1)
 end
 
-puts sum_even_fibs_upto(4000000, 0, 0)
+puts sum_even_fibs(4000000)
