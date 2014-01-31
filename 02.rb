@@ -10,12 +10,12 @@
 # - Use tail-recursive fibonacci method
 
 def fib(n, prev = 1, sum = 1)
-	n == 1 ? sum : fib(n - 1, sum, sum + prev)
+  n == 1 ? sum : fib(n - 1, sum, sum + prev)
 end
 
 def sum_even_fibs(limit, sum = 0, n = 0)
   next_fib = fib(3*n + 2)
-	next_fib > limit ? sum : sum_even_fibs(limit, sum+next_fib, n+1)
+  next_fib > limit ? sum : sum_even_fibs(limit, sum+next_fib, n+1)
 end
 
 puts sum_even_fibs(4000000)
