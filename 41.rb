@@ -5,6 +5,10 @@
 # What is the largest n-digit pandigital prime that exists?
 #
 # My Notes:
+# - A number is divisible by 3 if the sum of its digits is divisible by 3.
+#   There can't be any 8 or 9-digit pandigital primes since 1+...+8 = 36,
+#   and 1+...+9 = 45
+# - Similarly, there are no possibilities for n = 2, 3, 5, or 6
 # - For a given n, there are n! pandigital numbers below 10^n
 # - We can use the ruby line Prime.each(limit).to_a.size to determine
 #   how many primes there are below a certain limit. The number of 
@@ -35,4 +39,4 @@ def max_pandigital_prime(digits)
   max_pandigital_prime(digits[1..-1])
 end
 
-puts max_pandigital_prime([9,8,7,6,5,4,3,2,1])
+puts max_pandigital_prime([7,6,5,4,3,2,1])
