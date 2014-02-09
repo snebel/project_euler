@@ -17,7 +17,7 @@
 # - Then we can use a method for combining letter values of a word and iterate 
 #   over the list of words.
 
-require_relative('words')
+require_relative('./files/words')
 
 def triangle?(x)
   1.upto(x){ |n| return true if n*(n+1)/2 == x }
