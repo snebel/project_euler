@@ -22,4 +22,4 @@ def check_nums(start = 647)
   end
 end
 
-puts check_nums
+puts check_nums.first
