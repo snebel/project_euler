@@ -8,23 +8,25 @@
 # What 12-digit number do you form by concatenating the three terms in this sequence?
 #
 # My Notes:
-# - 1061 4-digit primes
-# - arithmetic sequence differs by a constant amount
-# - First find the primes who's permutations are also primes
+# - We can start with each 4-digit prime and check for an arithmetic sequence as follows:
+#   (1) Given p, generate a sorted list of all prime permutations of the digits of p
+#   (2) Take this list and find all combinations of 3 increasing elements
+#   (3) Check to see if any of these combinations is an arithmetic sequence
+# - Surprising to find that terms of the answer as well as the prime arithmetic
+#   sequence 379, 3709, 7039 also differ by 3300
 
 require 'prime'
 
-primes = []
-1000.upto(9999).each{ |n| primes << n if Prime.prime?(n) }
-
-permed_primes = []
-
-primes.each do |prime|
-  perms = prime.to_s.chars.permutation.to_a.map(&:join).map(&:to_i)
-  perms.each{ |p| perms.delete(p) unless Prime.prime?(p) }
-  permed_primes << perms.uniq
+def primes(low, high)
+  Prime.each(high).to_a.select{|p| p > low}
 end
 
-permed_primes.each do |seq|
-  
+def arithmetic_sequence(p)
+  perms = p.to_s.chars.permutation.map(&:join).map(&:to_i).uniq
+  perms.select!{|p| Prime.prime?(p)}
+  seqs = perms.combination(3).map{ |p| p.sort }
+  seqs.each{ |seq| return seq if seq[2] - seq[1] == seq[1] - seq[0] }
+  []
 end
+
+p primes(1000, 9999).map{|p| arithmetic_sequence(p)}.uniq
