@@ -14,14 +14,13 @@ end
 
 def find_non_abundant_sums(limit)
   abundants = (1..limit).select {|n| sum_proper_divisors(n) > n}
-  abundant_sums = []
+  sums = []
 
   abundants.each do |x|
-    abundants.each {|y| abundant_sums << (x+y)}
+    abundants.each {|y| sums << (x+y)}
     abundants -= [x]
   end
-
-  (1..limit).to_a - abundant_sums.uniq
+  (1..limit).to_a - sums
 end
 
 puts find_non_abundant_sums(28123).reduce(:+)
