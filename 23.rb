@@ -1,7 +1,9 @@
 # Find the sum of all the positive integers which cannot
 # be written as the sum of two abundant numbers.
-# My Note: find all abundant #s below limit, use nested 
-# loops to find all sums, subtract from array of pos. integers.
+#
+# My Notes: 
+# - find all abundant #s below limit, use nested loops to find 
+#   all sums, subtract from array of positive integers.
 
 def sum_proper_divisors(n)
   root = Math.sqrt(n) 
@@ -11,15 +13,15 @@ def sum_proper_divisors(n)
 end
 
 def find_non_abundant_sums(limit)
-  abundants = (1.upto(limit).map { |n| n if sum_proper_divisors(n) > n } - [nil])
+  abundants = (1..limit).select {|n| sum_proper_divisors(n) > n}
   abundant_sums = []
 
   abundants.each do |x|
-    abundants.each { |y| abundant_sums << (x+y) }
+    abundants.each {|y| abundant_sums << (x+y)}
     abundants -= [x]
   end
 
-  1.upto(28123).map {|n| n} - abundant_sums.uniq
+  (1..limit).to_a - abundant_sums.uniq
 end
 
 puts find_non_abundant_sums(28123).reduce(:+)
