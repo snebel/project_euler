@@ -2,7 +2,7 @@
 # a triangle with one-hundred rows.
 #
 # My Notes:
-# - The algorithm is as follows (ack--Sanjay Harvey):
+# - The algorithm is as follows (ack):
 #   (1) Begin with the penultimate row. For each element of this row, change the value
 #       to the sum of the element and its greatest child
 #   (2) Remove the row and repeat the process until the root is reached
