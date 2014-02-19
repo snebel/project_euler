@@ -13,20 +13,15 @@
 #   log of both bases and multiplying the logs by the exponents. We can then 
 #   compare the exponents directly to compare the numbers
 
+def compare(pair1, pair2) # each pair in the form [base, exponent]
+  Math.log(pair1[0]) * pair1[1] > Math.log(pair2[0]) * pair2[1]
+end
+
 pairs = File.readlines('./files/base_exp.txt').map do |line| 
   line.split(',').map(&:to_i)
 end
 
-def compare(pair1, pair2) # each pair in the form [base, exponent]
-  log1 = Math.log(pair1[0])
-  log2 = Math.log(pair2[0])
-  new_exp1 = log1 * pair1[1]
-  new_exp2 = log2 * pair2[1]
-  new_exp1 > new_exp2
-end
-
 max = pairs[0]
-
 pairs.each{ |pair| max = pair if compare(pair, max) }
 
 p max
