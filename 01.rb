@@ -3,15 +3,45 @@
 # Find the sum of all the multiples of 3 or 5 below 1000.
 #
 # My Notes:
-# - Use sets to avoid indexing elements
-# - Set's union method functions as set-theoretic union
+# - Here's a demonstration of four different ways to solve this problem in order of efficiency
 
+require 'benchmark'
 require 'set'
 
-def sum_mults_upto_limit(x, y, limit)
-  set1 = Set.new((0..limit).step(x))
-  set2 = Set.new((0..limit).step(y))
-  set1.union(set2).reduce(:+)
-end  
+iterations = 1_000
 
-puts sum_mults_upto_limit(3, 5, 999)
+Benchmark.bmbm do |bm|
+
+  bm.report("set") do 
+    iterations.times do
+      a = Set.new((0..1000).step(3))
+      b = Set.new((0..1000).step(5))
+      a.union(b).reduce(:+)
+    end
+  end
+
+  bm.report("array") do
+    iterations.times do
+      a = (0..999).step(3).to_a
+      b = (0..999).step(5).to_a
+      (a | b).reduce(:+)
+    end
+  end
+
+  bm.report("sum") do
+    iterations.times do
+      sum = 0
+      1000.times do |n|
+        sum += n if n % 5 == 0 || n % 3 == 0
+      end
+    end
+  end
+
+  bm.report("range") do
+    iterations.times do
+      sum = 0
+      (0...1000).step(3) {|n| sum += n}
+      (0...1000).step(5) {|n| sum += n unless n % 3 == 0}
+    end
+  end
+end
