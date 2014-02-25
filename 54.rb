@@ -1,65 +1,42 @@
+# The file, poker.txt, contains one-thousand random hands dealt to two players.
+# Each line of the file contains ten cards.the first five are Player 1's cards and 
+# the last five are Player 2's cards.
+#
+# How many hands does Player 1 win?
+#
+# My Notes:
+# - I've created a Card class that include ruby's comparable module, and  Hand class
+#   that contains five cards and has methods for classifying and evaluating a hand
+# - The only "ties" that occur for the 1000 games are when both players have one pair,
+#   or both players have a high card. I evaluate which hand is better in those instances
+#   in the loop below.
 
-class Card
-  include Comparable
-
-  VALS = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-  attr_reader :suit, :val
-
-  def initialize(string)
-    @val = string[0]
-    @suit = string[1]
-  end
-
-  def <=>(other)
-    VALS.index(self.val) <=> VALS.index(other.val)
-  end
-end
+require_relative './files/card.rb'
+require_relative './files/hand.rb'
 
 hands = File.readlines('./files/poker.txt').map do |line|
-  hands = line.split
+  cards = line.split
   make = proc {|c| Card.new(c)}
-  [hands[0..4].map(&make), hands[5..9].map(&make)]
+  hand1 = cards[0..4].map(&make)
+  hand2 = cards[5..9].map(&make)
+  [Hand.new(hand1), Hand.new(hand2)]
 end
 
-
-def flush?(hand)
-  hand.map{|c| c.suit}.uniq.size == 1
-end
-
-def straight?(hand)
-  vals = hand.map{|c| c.val}.sort
-  (vals.first..vals.last).to_a == vals
-end
-
-def check_for_dups(hand)
-  vals = hand.map{|c| c.val}
-  array.select{|e| array.count(e) > 1 }
-end
-
-def full_house?(hand)
-  three?(hand) && one_pair?(hand)
-end
-
-def three?(hand)
-  dups = check_for_dups(hand)
-  dups.select{|e| array.count(e) == 3 }.size == 1
-end
-
-def two_pair?(hand)
-  dups.select{|e| array.count(e) == 2 }.uniq.size == 2
-end
-
-def one_pair?(hand)
-  dups.select{|e| array.count(e) == 2 }.uniq.size == 1
-end
-
-def high_card(hand)
-  
-end
-
-count == 0
+player1_wins = 0
 
 hands.each do |game|
-  (count += 1; next) if game[1]  
+  hand1, hand2 = game[0], game[1]
+  p1, p2 = hand1.eval, hand2.eval
+
+  if p1 < p2
+    player1_wins += 1
+  elsif p1 == p2 && p1 == 8
+    player1_wins += 1 if hand1.cards.max > hand2.cards.max
+  elsif p1 == p2 && p1 == 7
+    p1_pair_val = hand1.cards.select{|c| hand1.vals.count(c.val) == 2}[0]
+    p2_pair_val = hand2.cards.select{|c| hand2.vals.count(c.val) == 2}[0]
+    player1_wins += 1 if p1_pair_val > p2_pair_val
+  end
 end
 
+p player1_wins
