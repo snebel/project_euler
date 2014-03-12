@@ -10,12 +10,10 @@ def lcm(a, b)
 	(a * b) / gcd(a, b)
 end
 
-def find_lcm_upto(max_factor)
-	product = 2
-	2.upto(max_factor) do |f|
-		product = lcm(f, product)
-	end
-	product
+def find_lcm_upto(max)
+  product = 2
+  3.upto(max) {|n| product = lcm(n, product)}
+  product
 end
 
 puts find_lcm_upto(20)

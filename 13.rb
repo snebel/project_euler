@@ -103,26 +103,19 @@ nums = [
 ]
 
 def sum_column(nums, i)
-  sum = 0
-  nums.each do |num|
-    s = num.to_s
-    sum += s[i].to_i
-  end
-  sum
+  nums.inject(0) {|sum, num| sum += num.to_s[i].to_i}
 end	
 
 # nums is an array of Bignums of equal length
 def add_big_nums(nums)
-  total = []
   index = nums.first.to_s.size - 1
   carry_over = 0
 
-  index.downto(0) do |i|
+  index.downto(0).map do |i|
     sum = sum_column(nums, i) + carry_over
     carry_over = sum / 10
-    i == 0 ? (total << sum) : (total << (sum % 10))
-  end
-  total.reverse.join
+    i == 0 ? sum : sum % 10
+  end.reverse.join
 end
 
 puts add_big_nums(nums)[0..9]

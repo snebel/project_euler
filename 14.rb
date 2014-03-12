@@ -11,7 +11,7 @@ end
 def longest_collatz_num(limit)
 	lengs = {}
 	2.upto(limit) { |n| lengs[collatz_length(n)] = n }
-	return lengs[lengs.keys.max]
+	lengs[lengs.keys.max]
 end
 
 puts longest_collatz_num(1000000)

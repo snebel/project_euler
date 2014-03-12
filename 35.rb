@@ -13,9 +13,7 @@ require 'prime'
 
 def rotate(n)
   digits = n.to_s.chars
-  last = digits.shift
-  digits << last
-  digits.join.to_i
+  (digits << digits.shift).join.to_i
 end
 
 def get_rotations(n, orig, ros = [])

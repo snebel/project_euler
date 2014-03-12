@@ -3,11 +3,9 @@
 # My Note: Ruby's uniq method makes this easy and efficient
 
 def distinct_powers(a_limit, b_limit)
-  nums = []
-  2.upto(a_limit) do |a|
-    2.upto(b_limit) { |b| nums << a**b }
-  end
-  nums.uniq.count
+  (2..a_limit).map { |a|
+    (2..b_limit).map {|b| a**b}
+  }.flatten.uniq.count
 end
 
 puts distinct_powers(100, 100)

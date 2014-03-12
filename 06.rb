@@ -6,7 +6,7 @@
 #   sum of the first n natural numbers
 
 def find_difference(n)
-  sq_sum = (n.to_f * (n + 1) / 2)**2
+  sq_sum = (n * (n + 1) / 2)**2
   sum_sqs = (n * (2 * n + 1) * (n + 1)) / 6
   sq_sum - sum_sqs
 end

@@ -13,8 +13,7 @@
 def is_pandigital?(m1, m2, prod)
   str = m1.to_s + m2.to_s + prod.to_s
   return false if str.size > 9
-  arr = str.split(//).uniq - ['0']
-  arr.size == 9
+  (str.chars.uniq - ['0']).size == 9
 end
 
 NUMS = []

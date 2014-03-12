@@ -35,19 +35,17 @@ grid =
 
 def row_products(grid)
   r = grid[0].size - 4
-  prods = grid.map do |row|
+  grid.map do |row|
     (0..r).map {|i| row[i]*row[i+1]*row[i+2]*row[i+3]}
-  end
-  prods.flatten.max
+  end.flatten.max
 end
 
 def diag_products(grid)
-  prods = (0..grid.size-4).map do |j|
+  (0..grid.size-4).map do |j|
     (0..grid[0].size-4).map do |k|
       grid[j][k] * grid[j+1][k+1] * grid[j+2][k+2] * grid[j+3][k+3]
     end
-  end
-  prods.flatten.max
+  end.flatten.max
 end
 
 puts [ 

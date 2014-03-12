@@ -25,7 +25,7 @@ end
 
 def sum_fact_digits(n)
   digits = n.to_s.chars.map(&:to_i)
-  digits.map {|i| factorial(i)}.reduce(:+)
+  digits.inject(0) {|s, i| s += factorial(i)}
 end
 
-puts (10..100_000).find_all {|n| sum_fact_digits(n) == n}.reduce(:+)
+puts (10..100_000).find_all {|n| sum_fact_digits(n) == n}.inject(:+)

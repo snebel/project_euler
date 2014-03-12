@@ -17,8 +17,7 @@
 
 # sums diagonals of n x n spiral
 def sum_diagonals(n)
-  return 0 if n == 0
-  return 1 if n == 1
+  return n if n <= 1
   4 * (n**2) - 6 * (n-1) + sum_diagonals(n-2)
 end
 

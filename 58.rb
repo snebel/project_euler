@@ -33,7 +33,6 @@ def check_prime_ratio(ratio)
     corners = n**2, n**2 - (n-1), n**2 - 2*(n-1), n**2 - 3*(n-1)
     num_primes += corners.select{ |n| Prime.prime?(n) }.size
     return n if num_primes.to_f / (2*n - 1) < ratio
-    n += 2
   end
 end
 

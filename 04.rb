@@ -20,9 +20,7 @@ def max_palindrome_product(limit)
 end
 
 def max_palindrome(nums)
-	pals = []
-	nums.each { |num| pals << num if is_palindrome?(num) }
-	pals.max
+	nums.select{|num| is_palindrome?(num)}.max
 end
 
 puts max_palindrome_product(999)

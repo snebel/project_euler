@@ -15,7 +15,7 @@ end
 
 def sum_amicables(limit)
 	sum = 0
-	220.upto(limit) { |n| sum += n if (d(d(n)) == n && d(n) != n); }
+	(220..limit).each {|n| sum += n if (d(d(n)) == n && d(n) != n)}
 	sum
 end
 
