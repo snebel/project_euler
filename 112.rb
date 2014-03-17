@@ -27,4 +27,4 @@ def first_number_with_bouncy_proportion(p)
   num
 end
 
-p first_number_with_bouncy_proportion(0.9)
+p first_number_with_bouncy_proportion(0.99)
