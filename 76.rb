@@ -11,47 +11,21 @@
 # two positive integers?
 #
 # My Notes: 
-# - For a number n, there are n/2 different pairs of numbers summing to n
-# - So to find the number of triples summing to n, for each number below n,
-#   x, we can take all the pairs summing to (n-x) and form (n-x)/2
-#   triples summing to 100.  Then we can find the total number of triples
-#   by summing the result of this formula for every x below 100.
-# - 
+# - We can use the same code as Problem 31 (summing coins to £2), only now our
+#   "coin" values are the numbers 1 to 99 and our total is 100
+# - I had to go back to problem 31 and rewrite the code to use memoization for
+#   this much larger input to avoid millions of recalculations. Runs in ~13ms
 
-def num_triples(n)
-  (1..n/3).map {|x| (n-x)/2 }.reduce(:+)
+VALS = Array(1..99).reverse
+total = 100
+PREVS = Array.new(total){Array.new(VALS.size)}
+
+def ways(t, idx = 0)
+  c = VALS[idx]
+  return 1 if c == 1 || t == 0
+  return PREVS[t-1][c-1] if PREVS[t-1][c-1]
+  res = (0..t/c).inject(0){|sum, i| sum += ways(t - i*c, idx+1)}
+  PREVS[t-1][c-1] = res
 end
-# 5
-# 1 1,3
-# 1 2,2
-# 2 1,2
-# 3 1,1
-#
-# 6
-# 1 1,4
-# 1 2,3
-# 2 1,3
-# 2 2,2
-#
-# 10
-# 1 1,8
-# 1 2,7
-# 1 3,6
-# 1 4,5
-# 2 *1,7
-# 2 2,6
-# 2 3,5
-# 2 4,4
-# 3 *1,6
-# 3 *2,5
-# 3 3,4
-# 4 *1,5
-# 4 *2,4
-# 4 *3,3
-# 5 *1,4
-# 5 *2,3
 
-p num_triples(5)
-p num_triples(6)
-p num_triples(10)
-
+p ways(total)
