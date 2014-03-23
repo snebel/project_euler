@@ -6,34 +6,25 @@
 #
 # My Notes:
 # - Need all linear combinations of a..h such that
-#   a(1) + b(2) + c(5) + d(10) + e(20) + f(50) + g(100) + h(200) = 200
-# - total possibilities to check using max possible number of each coin:
-#   200 * 100 * 40 * 20 * 10 * 4 * 2 * 1 = 1,280,000,000
-# - My solution is almost as bad as brute force, but is optimized
-#   to check possible number of coins only upto the maximum possible 
-#   number of coins given a fixed number of previous coins.
-# - I wanted to generalize this approach into a method taking an
-#   arbitrary total and arbitrary array of denominations, but could
-#   not figure out how to dynamically create nested loops in a ruby method.
+#   a*1 + b*2 + c*5 + d*10 + e*20 + f*50 + g*100 + h*200 = 200
+# - The number of ways to sum the coins to 200p equals the number of ways to sum to
+#   200p using a £2 coin + the number of ways using only smaller coins
+# - We can assert that the number of ways to sum coins to an amount, t, given a largest
+#   coin-value, c, equals the sum of the number of ways to sum to t using a fixed number
+#   of c-valued coins for each of 0 through t/c
+# - Our base case is the case where c = 1, for which there is only 1 way to sum to any total 
+# - We'll store found values in a 2d array to avoid repeated calculations
 
-count = 0
-0.upto((200-0)/1) do |a| # num 1p coins
-  0.upto((200-a)/2) do |b| # num 2p coins
-    0.upto((200-b)/5) do |c| # num 5p coins
-      0.upto((200-c)/10) do |d| # num 10p coins
-        0.upto((200-d)/20) do |e| # num 20p coins
-          0.upto((200-e)/50) do |f| # num 50p coins
-            0.upto((200-f)/100) do |g| # num 1£ coins
-              if a*1 + b*2 + c*5 + d*10 + e*20 + f*50 + g*100 == 200
-                count += 1 
-                print [a, b, c, d, e, f, g]
-                puts
-              end
-            end
-          end
-        end
-      end
-    end
-  end
+VALS = [200, 100, 50, 20, 10, 5, 2, 1]
+total = 200
+PREVS = Array.new(total){Array.new(VALS.size)}
+
+def ways(t, idx = 0)
+  c = VALS[idx]
+  return 1 if c == 1 || t == 0
+  return PREVS[t-1][c-1] if PREVS[t-1][c-1]
+  res = (0..t/c).inject(0){|sum, i| sum += ways(t - i*c, idx+1)}
+  PREVS[t-1][c-1] = res
 end
-puts count + 1 # for 1 2£ coin possibility
+
+p ways(total)
