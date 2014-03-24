@@ -18,15 +18,12 @@
 # My Notes:
 # - If we consider each numerator-denominator pair in the sequence to be (x, y),
 #   then each subsequent term is found by (x + 2*y, x + y)
+# - I think a tail-recursive iteration here is more readable and elegant than a loop
 
-def check_expansions_upto(limit)
-  x, y = [3, 2]
-  count = 0
-  limit.times do |n|
-    count += 1 if x.to_s.size > y.to_s.size
-    x, y = [x + 2*y, x + y]
-  end
-  count
+def check_expansions(limit, x = 3, y = 2, count = 0)
+  return count if limit == 0
+  count += 1 if x.to_s.size > y.to_s.size
+  check_expansions(limit-1, x + 2*y, x + y, count)
 end
 
-p check_expansions_upto(1_000)
+p check_expansions(1_000)
