@@ -7,23 +7,19 @@
 #       to the sum of the element and its greatest child
 #   (2) Remove the row and repeat the process until the root is reached
 
-def change_row(arr, r_idx)
-  row = arr[r_idx]
-    
-  row.each_with_index do |e, idx|
-    left_child = arr[r_idx+1][idx].to_i
-    right_child = arr[r_idx+1][idx+1].to_i
-    row[idx] = (e.to_i + [left_child, right_child].max).to_s
+tri = File.readlines("./files/triangle.txt").map do |x|
+  x.split(' ').map(&:to_i)
+end
+
+def max_path(tri)
+  for i in (tri.length-1).downto(1)
+    for j in (0...i)
+      tri[i-1][j] += [tri[i][j], tri[i][j+1]].max
+    end
   end
-  arr
+  tri[0][0]
 end
 
-def sum_tree_path(tree)
-  return tree if tree.size == 1
-  change_row(tree, tree.size - 2)
-  tree.pop
-  sum_tree_path(tree)
-end
+p max_path(tri)
 
-tree = File.readlines('./files/triangle.txt').map(&:split)
-p sum_tree_path(tree)
+
