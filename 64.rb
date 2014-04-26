@@ -36,6 +36,4 @@ def find_period_two(s)
 end
 
 non_squares = Array(1..10_000) - (1..100).map{|n| n**2}
-count = 0
-non_squares.each{|n| count += 1 if find_period_two(n).odd?}
-p count
+p non_squares.count{|n| find_period_two(n).odd?}
