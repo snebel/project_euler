@@ -19,7 +19,7 @@ HASH = {1 => 1, 89 => 89}
 
 def iteration(n)
   digits = n.to_s.chars.map(&:to_i)
-  digits.map {|c| c**2}.reduce(:+)
+  digits.map g{|c| c**2}.reduce(:+)
 end
 
 def check_num(n, steps = [])
@@ -33,10 +33,4 @@ def check_num(n, steps = [])
   end
 end
 
-def check_nums(limit)
-  count = 0
-  (1..limit).each{ |n| count += 1 if check_num(n) == 89 }
-  count
-end
-
-p check_nums(10_000_000)
+p (1..10_000_000).count{|n| check_num(n) == 89}
