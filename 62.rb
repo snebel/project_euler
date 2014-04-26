@@ -15,6 +15,8 @@
 cubes = (406..10_000).map{|i| [i**3, (i**3).to_s.chars.sort] }
 
 cubes.each do |c1|
-	n = cubes.select{ |c2| c1[1] == c2[1] }.size
-	(p c1[0]; break) if n == 5
+	if cubes.count{|c2| c1[1] == c2[1]} == 5
+    p c1[0] 
+    break
+  end
 end
