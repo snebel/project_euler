@@ -4,14 +4,14 @@
 # Find the largest palindrome made from the product of two 3-digit numbers.
 
 def max_palindrome_product(limit)
-	products = []
+	max = 0
 	1.upto(limit) do |j|
 		1.upto(limit) do |k|
-			prod = j * k
-			products << prod if prod.to_s == prod.to_s.reverse
+			p = j * k
+			max = p if p > max && p.to_s == p.to_s.reverse
 		end
 	end
-	products.max
+	max
 end
 
 p max_palindrome_product(999)
