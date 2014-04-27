@@ -22,19 +22,11 @@
 # - Let an iteration be defined as adding the reverse of a number to itself
 # - A number is a Lychrel if it takes more than 50 iterations to produce a palindrome
 
-def palindrome?(n)
-  n.to_s == n.to_s.reverse
-end
-
 def lychrel?(n, count = 0)
   return true if count == 50
   n += n.to_s.reverse.to_i
-  palindrome?(n) ? false : lychrel?(n, count+1)
+  n.to_s == n.to_s.reverse ? false : lychrel?(n, count+1)
 end
 
-count = 0
-(1..10_000).each do |n|
-  count += 1 if lychrel?(n)
-end
+p (1..10_000).count{|n| lychrel?(n)}
 
-puts count
