@@ -4,18 +4,13 @@
 # My Notes:
 # -
 
-def compare_digits(x, y)
+def digits(x, y)
   x.to_s.chars.sort == y.to_s.chars.sort
 end
 
 100.upto(Float::INFINITY).each do |x|
-  if (
-    compare_digits(x, 2*x) && 
-    compare_digits(x, 3*x) &&
-    compare_digits(x, 4*x) &&
-    compare_digits(x, 5*x) &&
-    compare_digits(x, 6*x)
-  )
-  p x; break
+  if (2..6).map{|n| digits(x, n*x)}.reduce(:&)
+    p x
+    break
   end
 end
