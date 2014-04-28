@@ -1,26 +1,21 @@
-# There exists exactly one Pythagorean
-# triplet for which a + b + c = 1000.
+# There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 # Find the product abc.
+#
+# My Notes:
+# - We can use Euclid's formula to generate Pythagorean triples.
+# - The formula states that for any positive integers m and n with m > n,
+#   a = m^2 - n^2, b = 2mn, c = m^2 + n^2 forms a Pythagorean triple.
 
-#list all triplets adding to sum
-def triples_summing_to(sum)
-	triples = []
-	1.upto(sum/3) do |num|
-		pairs_summing_to(1000 - num).each do |pair|
-			triples << (pair << num).sort
+def first_triple(sum)
+	for n in (1..Math.sqrt(sum/3))
+		for m in (n+1..Math.sqrt(sum - n**2))
+			a, b, c = [m**2 - n**2, 2*m*n, m**2 + n**2]
+			return [a, b, c] if a + b + c == sum
 		end
 	end
-	triples
 end
 
-def pairs_summing_to(sum)
-	1.upto(sum/2).map {|num| [num, sum-num]}
-end
+p first_triple(1_000).reduce(:*)
 
-def first_pythag(triples)
-	triples.each do |t| 
-		return t[0]*t[1]*t[2] if t[0]**2 + t[1]**2 == t[2]**2
-	end
-end
 
-puts first_pythag(triples_summing_to(1000))
+
