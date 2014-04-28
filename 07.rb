@@ -7,25 +7,27 @@
 # - If we use Ruby's Prime class, we can solve this in one line: Prime.first(10_001).last
 
 def is_prime?(n)
-  2.upto(Math.sqrt(n).to_i) { |num| return false if n % num == 0 }
+  2.upto(Math.sqrt(n)) {|f| return false if n % f == 0}
   true
 end
 
 def find_nth_prime(n)    
-  primes = [2]
-  num = 3
-  while primes.size < n
-  	primes << num if is_prime?(num)
-  	num += 2
+  last_prime = 3
+  (n - 2).times do
+    last_prime += 2
+    last_prime += 2 until is_prime?(last_prime)
   end
-  primes.last
+  last_prime
 end
 
-puts find_nth_prime(10001)
+puts find_nth_prime(10_001)
 
 # Using Ruby's Prime class
+#
 # require 'prime'
+#
 # def nth_prime(n)
 #   Prime.first(n).last
 # end
+#
 # puts nth_prime(10_001)
