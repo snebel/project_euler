@@ -18,14 +18,12 @@
 # - No n-digit curious numbers for n >= 8 since ranges don't overlap
 # - Turns out there are no n-digit curious numbers for n >= 6
 
-# tail recursive factorial much more efficient
 def factorial(n, ans = 1)
   n <= 1 ? ans : factorial(n-1, n*ans)
 end
 
 def sum_fact_digits(n)
-  digits = n.to_s.chars.map(&:to_i)
-  digits.inject(0) {|s, i| s += factorial(i)}
+  n.to_s.chars.map{|c| factorial(c.to_i)}.reduce(:+)
 end
 
-puts (10..100_000).find_all {|n| sum_fact_digits(n) == n}.inject(:+)
+p (10..100_000).select {|n| sum_fact_digits(n) == n}.reduce(:+)
