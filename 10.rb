@@ -6,7 +6,7 @@
 #   way to generate prime numbers.
 # - The second uses the more intuitive method of checking each number upto
 #   the limit for primality, with the slight optimization of checking only
-#   odd numbers above 2.
+#   odd numbers above 2, but is by far the slowest ~23 seconds
 # - The third uses Ruby's Prime class prime number generator, which according
 #   to the documentation uses Eratosthenes' method, but is still about five
 #   times slower than the sieve I've written.
@@ -36,7 +36,7 @@ def is_prime?(n)
 end
 
 lim = 2_000_000
-puts (3..lim).step(2).map{ |p| is_prime?(p) ? p : 0 }.reduce(:+)+2
+puts (3..lim).step(2).map{|p| is_prime?(p) ? p : 0}.reduce(:+)+2
 
 puts "Manual prime time: #{Time.now - beginning} seconds"
 puts
@@ -46,7 +46,7 @@ beginning = Time.now
 require 'prime'
 
 lim = 2_000_000
-puts Prime.each(lim).map{|p| p}.reduce(:+)
+puts Prime.each(lim).reduce(:+)
 
 puts "Ruby Prime time: #{Time.now - beginning} seconds"
 puts
