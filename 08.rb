@@ -22,10 +22,9 @@ s = "73167176531330624919225119674426574742355349194934
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450"
 
-def greatest_digits_product(int, n)
-	digits = int.to_s.chars.map(&:to_i)
-	last = digits.size - n - 1
-	(0..last).map {|i| digits[i..i+4].reduce(:*)}.max
+def greatest_digits_product(str, n)
+	d = str.to_s.chars.map(&:to_i)
+	(0...d.size-n).map {|i| d[i..i+4].reduce(:*)}.max
 end
 
-puts greatest_digits_product(s, 5)
+p greatest_digits_product(s, 5)
