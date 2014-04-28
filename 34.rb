@@ -19,7 +19,7 @@
 # - Turns out there are no n-digit curious numbers for n >= 6
 
 def factorial(n, ans = 1)
-  n <= 1 ? ans : factorial(n-1, n*ans)
+  n <= 1 ? ans : factorial(n - 1, n * ans)
 end
 
 def sum_fact_digits(n)
