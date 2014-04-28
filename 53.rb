@@ -1,8 +1,5 @@
 # How many, not necessarily distinct, values of  nCr, for 1 ≤ n ≤ 100,
 # are greater than one-million?
-#
-# My Notes:
-# - This problem is straightforward if we use a tail-recursive factorial method
 
 class Fixnum
   def fact(ans = 1)
@@ -17,8 +14,8 @@ end
 count = 0
 
 1.upto(100) do |n|
-  (1).upto(n) do |r|
-    count += 1 if n.choose r > 1_000_000
+  1.upto(n) do |r|
+    count += 1 if n.choose(r) > 1_000_000
   end
 end
 
