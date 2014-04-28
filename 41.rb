@@ -24,18 +24,15 @@
 # - Calling .permutation on the array [n, n-1, ... , 1] will give the n-pandigital
 #   numbers in decreasing order.
 
-def pandigital?(x, n = x.to_s.size)
-  (1..n).to_a == x.to_s.chars.map(&:to_i).sort
-end
+require 'prime'
 
-def is_prime?(n)
-  2.upto(Math.sqrt(n).to_i) { |i| return false if n % i == 0 }
-  true
+def pandigital?(x, n = x.to_s.size)
+  Array(1..n) == x.to_s.chars.map(&:to_i).sort
 end
 
 def max_pandigital_prime(digits)
-  perms = digits.permutation.map { |p| p.join.to_i }
-  perms.each { |p| return p if is_prime?(p) }
+  perms = digits.permutation.map {|p| p.join.to_i}
+  perms.each {|p| return p if p.prime?}
   max_pandigital_prime(digits[1..-1])
 end
 
