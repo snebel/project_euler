@@ -1,20 +1,20 @@
 # What is the value of the first triangular number to have over five hundred divisors?
+#
+# My Notes:
+# - We can calculate the number of divisors of a number, n, by finding its prime
+#   factorization and multiplying 1 greater than each exponent together.
 
-#returns number of divisors of n
-def num_divisors(n)
-  root = Math.sqrt(n) 
-  num = 2
-  2.upto(root.to_i) { |i| num += 2 if n % i == 0 }
-  root == root.to_i ? (num - 1) : num
+require 'prime'
+
+def divisors(n)  
+  n.prime_division.map{|p| p[1] + 1}.reduce(:*)
 end
 
-# returns the first triangular number
-# with more divisors than divs_limit
-def first_tri(divs_limit)
-	1.upto(Float::INFINITY) do |n| 
-		num = (n + 1) * (n.to_f / 2) # calc_nth_tri(n)
-		return num if num_divisors(num) > divs_limit
-	end
+def first_tri(limit)
+  2.upto(Float::INFINITY) do |n| 
+    tri = n * (n + 1) / 2
+    return tri if divisors(tri) > limit
+  end
 end
 
-puts first_tri(500)
+p first_tri(500)
