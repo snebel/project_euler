@@ -7,8 +7,8 @@
 #   a = m^2 - n^2, b = 2mn, c = m^2 + n^2 forms a Pythagorean triple.
 
 def first_triple(sum)
-	for n in (1..Math.sqrt(sum/3))
-		for m in (n+1..Math.sqrt(sum - n**2))
+	for m in (2..1.0/0) # 1.0/0 => Infinity
+		for n in (1..m-1)
 			a, b, c = [m**2 - n**2, 2*m*n, m**2 + n**2]
 			return [a, b, c] if a + b + c == sum
 		end
