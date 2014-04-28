@@ -17,7 +17,7 @@
 #   n: n*9*10**(n-1)
 
 def d(n)
-  (1..n).to_a.join[n-1].to_i
+  Array(1..n).join[n-1].to_i
 end
 
-puts d(1)*d(10)*d(100)*d(1_000)*d(10_000)*d(100_000)*d(1_000_000)
+p (0..6).inject(1){|ans, i| ans * d(10**i)}
